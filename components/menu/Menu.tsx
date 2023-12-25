@@ -23,7 +23,7 @@ export default function Menu({ setShowCart }: any) {
 	}, []);
 
 	return (
-		<div className="my-10">
+		<div className="py-10" id="menu">
 			<p className="text-secondary_fg font-medium text-center text-2xl mb-14">
 				Menu
 			</p>
