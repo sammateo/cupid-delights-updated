@@ -7,10 +7,10 @@ var formatter = new Intl.NumberFormat("en-IN", {
 });
 export default function Shipping() {
 	const supabase = createClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 	);
-	const [shipping, setShipping] = useState();
+	const [shipping, setShipping] = useState<any | null>();
 	const getShipping = async () => {
 		const { data: shipping } = await supabase.from("shipping").select();
 		console.log(shipping);
@@ -22,7 +22,7 @@ export default function Shipping() {
 	}, []);
 
 	return (
-		<div className="mb-10 mx-2">
+		<div className="pb-10 px-2">
 			<p className="text-secondary_fg font-medium text-center text-2xl mb-10">
 				Shipping
 			</p>
@@ -33,7 +33,7 @@ export default function Shipping() {
 			</div>
 			<div>
 				{shipping ? (
-					shipping.map((info) => (
+					shipping.map((info: any) => (
 						<div
 							key={info.id}
 							className="grid grid-cols-3 text-primary_fg mx-auto min-w-[300px] max-w-[500px] text-center rounded shadow-sm shadow-secondary_bg px-2 py-4"
@@ -46,7 +46,9 @@ export default function Shipping() {
 						</div>
 					))
 				) : (
-					<div>Loading...</div>
+					<div className="text-primary_fg font-medium text-xl text-center">
+						Loading...
+					</div>
 				)}
 			</div>
 			<div className="text-primary_fg text-center mt-4">
