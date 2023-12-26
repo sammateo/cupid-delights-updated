@@ -190,7 +190,9 @@ export default function page() {
 						</div>
 					</div>
 					<div className="my-6">
-						<p className="text-secondary_fg text-xl">Order Summary</p>
+						<p className="text-secondary_fg text-xl text-center">
+							Order Summary
+						</p>
 						<div className="flex justify-between">
 							<p className="">Subtotal</p>
 							<p>{formatter.format(getSubTotal())}</p>
@@ -250,7 +252,7 @@ export default function page() {
 								</p>
 							</div>
 						) : (
-							<Link href="/checkout">
+							<Link href="#shipping_form">
 								<button
 									className="bg-primary_fg text-primary_bg py-1 px-5 mt-2 text-lg rounded w-full"
 									onClick={() => {
@@ -264,7 +266,15 @@ export default function page() {
 					</div>
 				</div>
 			</div>
-			{showShippingForm && <Shippingform />}
+			{showShippingForm && (
+				<Shippingform
+					cart={cart}
+					shipping={shipping}
+					shippingType={shippingType}
+					getSubTotal={getSubTotal}
+					getQuantity={getQuantity}
+				/>
+			)}
 		</div>
 	);
 }

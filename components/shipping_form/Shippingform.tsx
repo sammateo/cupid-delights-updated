@@ -1,8 +1,57 @@
-import React from "react";
+var formatter = new Intl.NumberFormat("en-IN", {
+	style: "currency",
+	currency: "GBP",
+});
 
-export default function Shippingform() {
+export default function Shippingform({
+	cart,
+	shipping,
+	shippingType,
+	getSubTotal,
+	getQuantity,
+}: any) {
+	const getOrder = () => {
+		let order = "Order Summary: \n";
+		cart.forEach((item: any) => {
+			if (item.quantity > 0) {
+				order += `${item.quantity} of ${item.name} @ ${formatter.format(
+					item.price
+				)}\n`;
+			}
+		});
+		order += `Subtotal: ${formatter.format(getSubTotal())}\n`;
+		order += `Shipping: ${formatter.format(getShippingPrice())}\n`;
+		order += `Shipping Type: ${
+			shippingType === "express" ? "Express" : "Guaranteed Next Day"
+		}\n`;
+		order += `Total: ${formatter.format(getTotal())}`;
+
+		return order;
+	};
+	const getShippingPrice = () => {
+		console.log(shipping);
+		console.log(getQuantity());
+		let shipping_price = 0;
+		shipping.map((ship: any) => {
+			if (
+				getQuantity() >= ship.lower_range &&
+				getQuantity() <= ship.upper_range
+			) {
+				console.log(ship.express);
+				if (shippingType == "express") {
+					shipping_price = ship.express;
+				} else {
+					shipping_price = ship.next_day;
+				}
+			}
+		});
+		return shipping_price;
+	};
+	const getTotal = () => {
+		return getSubTotal() + getShippingPrice();
+	};
 	return (
-		<div>
+		<div id="shipping_form">
 			<p className="text-secondary_fg font-medium text-center text-2xl mb-4">
 				Shipping Details
 			</p>
@@ -34,10 +83,8 @@ export default function Shippingform() {
 				<textarea
 					name="message"
 					readOnly
-					value={
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellendus deserunt iste saepe ullam nihil? Maxime tenetur quisquam quas hic voluptatibus officia, vero eaque. Nesciunt saepe perferendis repudiandae ab soluta! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellendus deserunt iste saepe ullam nihil? Maxime tenetur quisquam quas hic voluptatibus officia, vero eaque. Nesciunt saepe perferendis repudiandae ab soluta!"
-					}
-					className="shipping_input border-2 border-dashed px-2"
+					value={getOrder()}
+					className="shipping_input border-2 border-dashed px-2 h-32"
 				/>
 				<label>Additional Info</label>
 				<textarea
