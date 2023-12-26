@@ -12,9 +12,12 @@ export default function Navbar() {
 				<Link href="/#menu">
 					<p>Menu</p>
 				</Link>
-
-				<p>Gallery</p>
-				<p>Contact</p>
+				<Link href="#contact">
+					<p>Contact</p>
+				</Link>
+				<Link href="/checkout">
+					<p>Cart</p>
+				</Link>
 			</div>
 		</div>
 	);

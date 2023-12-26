@@ -193,7 +193,7 @@ function Cart({ setShowCart }: any) {
 							</div>
 							<div className="flex justify-between">
 								<p className="">Shipping</p>
-								<p>
+								<div>
 									{getQuantity() >= 6 && shipping ? (
 										shipping.map((ship: any) =>
 											getQuantity() >= ship.lower_range &&
@@ -210,11 +210,11 @@ function Cart({ setShowCart }: any) {
 									) : (
 										<p>minimum 6 rotis</p>
 									)}
-								</p>
+								</div>
 							</div>
 							<div className="flex justify-between border-t-2 border-primary_fg">
 								<p className="">Total</p>
-								<p>
+								<div>
 									{getQuantity() >= 6 && shipping ? (
 										shipping.map((ship: any) =>
 											getQuantity() >= ship.lower_range &&
@@ -231,7 +231,7 @@ function Cart({ setShowCart }: any) {
 									) : (
 										<p>minimum 6 rotis</p>
 									)}
-								</p>
+								</div>
 							</div>
 						</div>
 						<div className="">

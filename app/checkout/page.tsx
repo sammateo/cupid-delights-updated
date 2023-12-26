@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import Shippingform from "@/components/shipping_form/Shippingform";
 var formatter = new Intl.NumberFormat("en-IN", {
 	style: "currency",
 	currency: "GBP",
@@ -45,11 +46,9 @@ export default function page() {
 	};
 	const getQuantity = () => {
 		let quantity = 0;
-		console.log(cart);
 		if (cart && cart.length > 0) {
 			cart.forEach((roti: any) => (quantity += roti.quantity));
 		}
-		console.log(quantity);
 		return quantity;
 	};
 	useEffect(() => {
@@ -58,7 +57,7 @@ export default function page() {
 	}, []);
 
 	return (
-		<div>
+		<div className="flex-1">
 			<Navbar />
 			<h1 className="text-secondary_fg font-medium text-center text-2xl mb-2 mt-4">
 				Checkout
@@ -66,7 +65,7 @@ export default function page() {
 			<div className="flex justify-evenly flex-wrap w-full px-5 py-2">
 				<div className=" w-6/12 max-w-[800px] min-w-[300px]">
 					{/* Cart */}
-					<p className="text-secondary_fg text-xl text-center">My Cart</p>
+					<p className="text-secondary_fg text-xl text-center">My cart</p>
 					{cart ? (
 						cart.map((roti: any) => (
 							<div
@@ -185,7 +184,7 @@ export default function page() {
 							</div>
 						</div>
 					</div>
-					<div>
+					<div className="my-6">
 						<p className="text-secondary_fg text-xl">Order Summary</p>
 						<div className="flex justify-between">
 							<p className="">Subtotal</p>
@@ -255,6 +254,7 @@ export default function page() {
 					</div>
 				</div>
 			</div>
+			<Shippingform />
 		</div>
 	);
 }

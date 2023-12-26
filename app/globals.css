@@ -8,7 +8,11 @@
 	--secondary-fg: #7e1946;
 	--secondary-bg: rgba(12, 98, 145, 0.5);
 }
-
+@layer components {
+	.shipping_input {
+		@apply w-3/4 mx-auto py-1 border-b-2 border-primary_fg resize-none outline-none;
+	}
+}
 @media (prefers-color-scheme: dark) {
 	:root {
 		--primary-bg: #fbfef9;
