@@ -2,7 +2,7 @@
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 var formatter = new Intl.NumberFormat("en-IN", {
 	style: "currency",
 	currency: "GBP",
