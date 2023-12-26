@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa";
 var formatter = new Intl.NumberFormat("en-IN", {
 	style: "currency",
 	currency: "GBP",
@@ -46,11 +47,9 @@ function Cart({ setShowCart }: any) {
 
 	const getQuantity = () => {
 		let quantity = 0;
-		console.log(rotiMenu);
 		if (rotiMenu && rotiMenu.length > 0) {
 			rotiMenu.forEach((roti: any) => (quantity += roti.quantity));
 		}
-		console.log(quantity);
 		return quantity;
 	};
 	const getShippingType = () => {
@@ -68,7 +67,7 @@ function Cart({ setShowCart }: any) {
 	}, []);
 
 	return (
-		<div className="text-primary_fg backdrop-filter backdrop-blur-sm bg-opacity-10 border border-primary_fg mx-auto min-w-[350px] max-w-[700px] text-center rounded shadow-lg shadow-secondary_bg px-2 py-4 mb-2 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+		<div className="text-primary_fg backdrop-filter backdrop-blur-sm bg-opacity-10 border border-primary_fg mx-auto min-w-[315px] w-[90vw] max-w-[500px] text-center rounded shadow-lg shadow-secondary_bg px-2 py-4 mb-2 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 			<div className="flex justify-between items-center text-secondary_fg">
 				<p className=" text-xl font-medium">Cart</p>
 				<IoClose
@@ -98,7 +97,7 @@ function Cart({ setShowCart }: any) {
 									<p>{formatter.format(roti.price)}</p>
 								</div>
 								{/* Quantity buttons */}
-								<div className="flex justify-center items-center gap-2 py-0 border border-primary_fg w-1/4 rounded">
+								<div className="flex justify-evenly items-center gap-2 py-0 border border-primary_fg w-4/12 rounded">
 									<button
 										onClick={() => {
 											if (roti.quantity > 0) {
@@ -117,7 +116,7 @@ function Cart({ setShowCart }: any) {
 											}
 										}}
 									>
-										-
+										-{/* <FaMinus className="text-sm" /> */}
 									</button>
 									<span>{roti.quantity}</span>
 									<button
@@ -136,7 +135,7 @@ function Cart({ setShowCart }: any) {
 											);
 										}}
 									>
-										+
+										+{/* <FaPlus className="text-sm" /> */}
 									</button>
 								</div>
 							</div>

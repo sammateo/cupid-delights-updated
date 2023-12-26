@@ -13,7 +13,6 @@ export default function Shipping() {
 	const [shipping, setShipping] = useState<any | null>();
 	const getShipping = async () => {
 		const { data: shipping } = await supabase.from("shipping").select();
-		console.log(shipping);
 		setShipping(shipping);
 	};
 

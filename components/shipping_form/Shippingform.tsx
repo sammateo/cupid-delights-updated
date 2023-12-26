@@ -34,15 +34,12 @@ export default function Shippingform({
 		return order;
 	};
 	const getShippingPrice = () => {
-		console.log(shipping);
-		console.log(getQuantity());
 		let shipping_price = 0;
 		shipping.map((ship: any) => {
 			if (
 				getQuantity() >= ship.lower_range &&
 				getQuantity() <= ship.upper_range
 			) {
-				console.log(ship.express);
 				if (shippingType == "express") {
 					shipping_price = ship.express;
 				} else {
@@ -67,10 +64,11 @@ export default function Shippingform({
 			)
 			.then(
 				(result) => {
-					console.log(result.text);
+					// toast
 				},
 				(error) => {
-					console.log(error.text);
+					// toast
+					// console.log(error.text);
 				}
 			);
 		(document.getElementById(

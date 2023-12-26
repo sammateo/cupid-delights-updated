@@ -11,7 +11,6 @@ function Importantinfo() {
 		const { data: importantInfo } = await supabase
 			.from("important_info")
 			.select();
-		console.log(importantInfo);
 		setImportantInfo(importantInfo);
 	};
 

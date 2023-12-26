@@ -12,7 +12,6 @@ export default function Notices() {
 			.from("notices")
 			.select("*")
 			.eq("deleted", false);
-		console.log(notices);
 		setNotices(notices);
 	};
 

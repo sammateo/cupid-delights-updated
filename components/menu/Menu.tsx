@@ -14,7 +14,6 @@ export default function Menu({ setShowCart }: any) {
 	const [rotiMenu, setRotiMenu] = useState<any | null>();
 	const getMenu = async () => {
 		const { data: menu } = await supabase.from("menu").select();
-		console.log(menu);
 		setRotiMenu(menu);
 	};
 

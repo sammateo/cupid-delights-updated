@@ -96,7 +96,7 @@ export default function page() {
 									<p>{formatter.format(roti.price)}</p>
 								</div>
 								{/* Quantity buttons */}
-								<div className="flex justify-center items-center gap-2 py-0 border border-primary_fg w-1/4 rounded">
+								<div className="flex justify-evenly items-center gap-2 py-0 border border-primary_fg w-4/12 rounded">
 									<button
 										onClick={() => {
 											if (roti.quantity > 0) {
