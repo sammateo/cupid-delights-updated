@@ -2,7 +2,10 @@ var formatter = new Intl.NumberFormat("en-IN", {
 	style: "currency",
 	currency: "GBP",
 });
-
+import emailjs from "@emailjs/browser";
+import { init } from "@emailjs/browser";
+init("user_0452qsSu7KBjTA92mFxpX");
+import { useRouter } from "next/navigation";
 export default function Shippingform({
 	cart,
 	shipping,
@@ -10,6 +13,8 @@ export default function Shippingform({
 	getSubTotal,
 	getQuantity,
 }: any) {
+	const router = useRouter();
+
 	const getOrder = () => {
 		let order = "Order Summary: \n";
 		cart.forEach((item: any) => {
@@ -50,12 +55,42 @@ export default function Shippingform({
 	const getTotal = () => {
 		return getSubTotal() + getShippingPrice();
 	};
+	function sendEmail(e: any) {
+		e.preventDefault();
+		alert("Check your email for order confirmation and payment details.");
+		emailjs
+			.sendForm(
+				"service_hl0g155",
+				"template_dica989",
+				e.target,
+				"user_0452qsSu7KBjTA92mFxpX"
+			)
+			.then(
+				(result) => {
+					console.log(result.text);
+				},
+				(error) => {
+					console.log(error.text);
+				}
+			);
+		(document.getElementById(
+			"shipping_details_form"
+		) as HTMLFormElement)!.reset();
+		sessionStorage.removeItem("cartData");
+		sessionStorage.removeItem("shipping_type");
+		router.push("/");
+	}
+
 	return (
 		<div id="shipping_form">
 			<p className="text-secondary_fg font-medium text-center text-2xl mb-4">
 				Shipping Details
 			</p>
-			<form className="flex flex-col gap-2 text-primary_fg justify-center w-11/12 max-w-[700px] mx-auto text-center rounded my-2">
+			<form
+				id="shipping_details_form"
+				onSubmit={sendEmail}
+				className="flex flex-col gap-2 text-primary_fg justify-center w-11/12 max-w-[700px] mx-auto text-center rounded my-2"
+			>
 				<label className="">Name</label>
 				<input type="text" name="to_name" required className="shipping_input" />
 				<label>Phone Number</label>

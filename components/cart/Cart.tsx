@@ -15,9 +15,10 @@ function Cart({ setShowCart }: any) {
 	);
 	const [rotiMenu, setRotiMenu] = useState<any | null>();
 	const [shipping, setShipping] = useState<any | null>();
-	const [shippingType, setShippingType] = useState<any | null>("next_day");
+	const [shippingType, setShippingType] = useState<any | null>();
 	const onShippingTypeChanged = (e: React.FormEvent<HTMLInputElement>) => {
 		setShippingType(e.currentTarget.value);
+		sessionStorage.setItem("shipping_type", e.currentTarget.value);
 	};
 
 	const getMenu = async () => {
@@ -52,10 +53,18 @@ function Cart({ setShowCart }: any) {
 		console.log(quantity);
 		return quantity;
 	};
+	const getShippingType = () => {
+		if (sessionStorage.getItem("shipping_type")) {
+			setShippingType(sessionStorage.getItem("shipping_type"));
+			return;
+		}
+		sessionStorage.setItem("shipping_type", "next_day");
+	};
 
 	useEffect(() => {
 		getMenu();
 		getShipping();
+		getShippingType();
 	}, []);
 
 	return (

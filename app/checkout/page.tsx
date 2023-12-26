@@ -34,6 +34,7 @@ export default function page() {
 	const [showShippingForm, setShowShippingForm] = useState<boolean>(false);
 	const onShippingTypeChanged = (e: React.FormEvent<HTMLInputElement>) => {
 		setShippingType(e.currentTarget.value);
+		sessionStorage.setItem("shipping_type", e.currentTarget.value);
 		setShowShippingForm(false);
 	};
 	const getSubTotal = () => {
@@ -54,9 +55,17 @@ export default function page() {
 		}
 		return quantity;
 	};
+	const getShippingType = () => {
+		if (sessionStorage.getItem("shipping_type")) {
+			setShippingType(sessionStorage.getItem("shipping_type"));
+			return;
+		}
+		sessionStorage.setItem("shipping_type", "next_day");
+	};
 	useEffect(() => {
 		getCart();
 		getShipping();
+		getShippingType();
 	}, []);
 
 	return (
