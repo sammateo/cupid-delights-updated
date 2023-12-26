@@ -30,16 +30,20 @@ export default function Shippingform() {
 				<label>Country</label>
 				<input type="text" name="country" required className="shipping_input" />
 				<label>Order</label>
+
 				<textarea
 					name="message"
 					readOnly
-					className="shipping_input overflow-y-scroll border-2"
+					value={
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellendus deserunt iste saepe ullam nihil? Maxime tenetur quisquam quas hic voluptatibus officia, vero eaque. Nesciunt saepe perferendis repudiandae ab soluta! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellendus deserunt iste saepe ullam nihil? Maxime tenetur quisquam quas hic voluptatibus officia, vero eaque. Nesciunt saepe perferendis repudiandae ab soluta!"
+					}
+					className="shipping_input border-2 border-dashed px-2"
 				/>
 				<label>Additional Info</label>
 				<textarea
 					name="addInfo"
 					placeholder="Notes for order"
-					className="shipping_input"
+					className="shipping_input px-2"
 				/>
 				<button
 					type="submit"
