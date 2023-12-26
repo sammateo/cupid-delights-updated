@@ -30,8 +30,11 @@ export default function page() {
 	};
 	const [shipping, setShipping] = useState<any | null>();
 	const [shippingType, setShippingType] = useState<any | null>("next_day");
+
+	const [showShippingForm, setShowShippingForm] = useState<boolean>(false);
 	const onShippingTypeChanged = (e: React.FormEvent<HTMLInputElement>) => {
 		setShippingType(e.currentTarget.value);
+		setShowShippingForm(false);
 	};
 	const getSubTotal = () => {
 		let subTotal = 0;
@@ -100,6 +103,7 @@ export default function page() {
 													"cartData",
 													JSON.stringify(cart)
 												);
+												setShowShippingForm(false);
 											}
 										}}
 									>
@@ -117,6 +121,7 @@ export default function page() {
 												)
 											);
 											sessionStorage.setItem("cartData", JSON.stringify(cart));
+											setShowShippingForm(false);
 										}}
 									>
 										+
@@ -246,7 +251,12 @@ export default function page() {
 							</div>
 						) : (
 							<Link href="/checkout">
-								<button className="bg-primary_fg text-primary_bg py-1 px-5 mt-2 text-lg rounded w-full">
+								<button
+									className="bg-primary_fg text-primary_bg py-1 px-5 mt-2 text-lg rounded w-full"
+									onClick={() => {
+										setShowShippingForm(true);
+									}}
+								>
 									Checkout
 								</button>
 							</Link>
@@ -254,7 +264,7 @@ export default function page() {
 					</div>
 				</div>
 			</div>
-			<Shippingform />
+			{showShippingForm && <Shippingform />}
 		</div>
 	);
 }
